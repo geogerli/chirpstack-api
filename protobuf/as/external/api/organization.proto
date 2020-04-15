@@ -84,6 +84,25 @@ service OrganizationService {
 			delete: "/api/organizations/{organization_id}/users/{user_id}"
 		};
 	}
+
+	rpc GetLicense(google.protobuf.Empty) returns (License) {
+		option(google.api.http) = {
+			get: "/api/license"
+		};
+	}
+
+	rpc UpdateLicense(License) returns (google.protobuf.Empty) {
+		option(google.api.http) = {
+			put: "/api/license"
+			body: "*"
+		};
+	}
+
+}
+
+message License {
+	string sequence = 1;
+	string license = 2;
 }
 
 message Organization {
