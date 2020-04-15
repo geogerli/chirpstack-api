@@ -91,7 +91,7 @@ service OrganizationService {
 		};
 	}
 
-	rpc UpdateLicense(License) returns (google.protobuf.Empty) {
+	rpc UpdateLicense(License) returns (License) {
 		option(google.api.http) = {
 			put: "/api/license"
 			body: "*"
@@ -103,6 +103,8 @@ service OrganizationService {
 message License {
 	string sequence = 1;
 	string license = 2;
+	int32 app_num = 3;
+	int32 dev_num = 4;
 }
 
 message Organization {
