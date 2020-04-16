@@ -469,7 +469,7 @@ message StreamDeviceEventLogsResponse {
 }
 
 message DevAddrList {
-    repeated string dev_addrs = 1;
+    repeated string dev_addrs = 1 [json_name = "devAddrs"];
 }
 
 message  DevAddrConflictMap {
