@@ -137,6 +137,7 @@ service DeviceService {
     rpc CheckDevAddrConflict(DevAddrList) returns (DevAddrConflictMap) {
         option (google.api.http) = {
             post: "/api/devices/checkDevAddrConflict"
+            body: "*"
         };
     }
 
@@ -469,10 +470,10 @@ message StreamDeviceEventLogsResponse {
 }
 
 message DevAddrList {
-    repeated string addrs = 1;
+    repeated string dev_addrs = 1;
 }
 
-message  DevAddrConflictMap {
+message DevAddrConflictMap {
     map<string, string> conflict = 1;
 }
 
