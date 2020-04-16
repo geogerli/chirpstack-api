@@ -133,6 +133,13 @@ service DeviceService {
         };
     }
 
+    // CheckDevAddrConflict returns a map of conflict device addr and eui.
+    rpc CheckDevAddrConflict(DevAddrList) returns (DevAddrConflictMap) {
+        option (google.api.http) = {
+            post: "/api/devices/checkDevAddrConflict"
+        };
+    }
+
     // StreamFrameLogs streams the uplink and downlink frame-logs for the given DevEUI.
 	//   * These are the raw LoRaWAN frames and this endpoint is intended for debugging only.
 	//   * This endpoint does not work from a web-browser.
@@ -460,3 +467,12 @@ message StreamDeviceEventLogsResponse {
     // The event payload in JSON encoding.
     string payload_json = 2 [json_name = "payloadJSON"];
 }
+
+message DevAddrList {
+    repeated string dev_addrs = 1;
+}
+
+message  DevAddrConflictMap {
+    map<string, string> conflict = 1;
+}
+
