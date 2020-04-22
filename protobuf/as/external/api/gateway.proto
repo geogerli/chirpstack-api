@@ -167,6 +167,8 @@ message ListGatewayRequest {
 
 	// Search on name or gateway MAC (optional).
 	string search = 4;
+
+	map<string, string> tags = 5;
 }
 
 message GatewayListItem {
@@ -199,6 +201,8 @@ message GatewayListItem {
 
     // Location.
     common.Location location = 10;
+
+	map<string, string> tags = 11;
 }
 
 message ListGatewayResponse {

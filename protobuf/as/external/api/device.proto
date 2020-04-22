@@ -240,6 +240,7 @@ message DeviceListItem {
     // Device battery level as a percentage.
     float device_status_battery_level = 12;
 
+    map<string, string> tags = 13;
     // The last time the application-server received any data from the device,
     // or an empty string when the device never sent any data.
     google.protobuf.Timestamp last_seen_at = 9 [json_name = "lastSeenAt"];
