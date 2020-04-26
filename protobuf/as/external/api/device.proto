@@ -198,6 +198,9 @@ message Device {
     // These tags are exposed in the event payloads or to integration. Tags are
     // intended for aggregation and filtering.
     map<string, string> tags = 9;
+
+    // Device addr (HEX encoded).
+    string dev_addr = 10;
 }
 
 message DeviceListItem {
@@ -244,6 +247,9 @@ message DeviceListItem {
     // The last time the application-server received any data from the device,
     // or an empty string when the device never sent any data.
     google.protobuf.Timestamp last_seen_at = 9 [json_name = "lastSeenAt"];
+
+    // Device addr (HEX encoded).
+    string dev_addr = 14;
 }
 
 message DeviceKeys {
@@ -318,7 +324,7 @@ message ListDeviceRequest {
     // Application ID to filter on.
     int64 application_id = 3 [json_name = "applicationID"];
 
-    // Search on name or DevEUI.
+    // Search on name or DevEUI or DevAddr.
     string search = 4;
 
     // Multicast-group ID to filter on (string formatted UUID).
