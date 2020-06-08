@@ -104,6 +104,8 @@ message UserListItem {
 
 	// Last update timestamp.
 	google.protobuf.Timestamp updated_at = 9;
+
+	UserOrganization organizations = 10;
 }
 
 message UserOrganization {
@@ -130,7 +132,7 @@ message CreateUserRequest {
 	string password = 2;
 
 	// Add the user to the following organizations.
-	repeated UserOrganization organizations = 3;
+	UserOrganization organizations = 3;
 }
 
 message CreateUserResponse {
@@ -152,6 +154,8 @@ message GetUserResponse {
 
 	// Last update timestamp.
 	google.protobuf.Timestamp updated_at = 3;
+
+	UserOrganization organizations = 4;
 }
 
 message UpdateUserRequest {
