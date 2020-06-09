@@ -18,6 +18,12 @@ service UserService {
 		};
 	}
 
+	rpc ListProfiles(ListUserRequest) returns (ListUserProfileResponse) {
+		option(google.api.http) = {
+			get: "/api/users/profiles"
+		};
+	}
+
 	// Get data for a particular user.
 	rpc Get(GetUserRequest) returns (GetUserResponse) {
 		option(google.api.http) = {
@@ -104,8 +110,6 @@ message UserListItem {
 
 	// Last update timestamp.
 	google.protobuf.Timestamp updated_at = 9;
-
-	UserOrganization organizations = 10;
 }
 
 message UserOrganization {
@@ -132,7 +136,7 @@ message CreateUserRequest {
 	string password = 2;
 
 	// Add the user to the following organizations.
-	UserOrganization organizations = 3;
+	repeated UserOrganization organizations = 3;
 }
 
 message CreateUserResponse {
@@ -154,8 +158,6 @@ message GetUserResponse {
 
 	// Last update timestamp.
 	google.protobuf.Timestamp updated_at = 3;
-
-	UserOrganization organizations = 4;
 }
 
 message UpdateUserRequest {
@@ -193,4 +195,41 @@ message UpdateUserPasswordRequest {
 
 	// New pasword.
 	string password = 2;
+}
+
+message UserProfileListItem {
+	// User ID.
+	// Will be set automatically on create.
+	int64 id = 1;
+	// Username of the user.
+	string username = 2;
+	// Set to true to make the user a global administrator.
+	bool is_admin = 3;
+	// Set to false to disable the user.
+	bool is_active = 4;
+	string email = 5;
+	string note = 6;
+	// Organization ID.
+	int64 organization_id = 7 [json_name = "organizationID"];
+	string organization_name = 8;
+	// User is admin within the context of the organization.
+	// There is no need to set the is_device_admin and is_gateway_admin flags.
+	bool is_org_admin = 9;
+	// User is able to modify device related resources (applications,
+	// device-profiles, devices, multicast-groups).
+	bool is_device_admin = 10;
+	// User is able to modify gateways.
+	bool is_gateway_admin = 11;
+	// Created at timestamp.
+	google.protobuf.Timestamp created_at = 12;
+	// Last update timestamp.
+	google.protobuf.Timestamp updated_at = 13;
+}
+
+message ListUserProfileResponse {
+	// Total number of users.
+	int64 total_count = 1;
+
+	// Result-set.
+	repeated UserProfileListItem result = 2;
 }
