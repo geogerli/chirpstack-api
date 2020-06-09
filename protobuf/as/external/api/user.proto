@@ -179,6 +179,8 @@ message ListUserRequest {
 
 	// When provided, the given string will be used to search on username.
 	string search = 3;
+	// Organization ID.
+	int64 organization_id = 4 [json_name = "organizationID"];
 }
 
 message ListUserResponse {
