@@ -62,6 +62,15 @@ service InternalService {
             get: "/api/internal/api-keys"
         };
     }
+
+    // MQTT connect auth and return acl.
+    rpc MQTTConnectAuth(MQTTConnectAuthRequest) returns (MQTTConnectAuthResponse) {
+        option(google.api.http) = {
+            post: "/api/mqtt/auth"
+            body: "*"
+        };
+    }
+
 }
 
 message APIKey {
@@ -240,4 +249,20 @@ message BrandingResponse {
     
     // Footer html.
 	string footer = 3;
+}
+
+message MQTTConnectAuthRequest {
+    string username = 1;
+    string password = 2;
+    string client_id = 3;
+}
+
+message MQTTConnectAuthItem {
+    string action = 1;
+    string ip = 2;
+    repeated string topics = 3;
+}
+
+message MQTTConnectAuthResponse {
+    repeated MQTTConnectAuthItem result = 1;
 }
