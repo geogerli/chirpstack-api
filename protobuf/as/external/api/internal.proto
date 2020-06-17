@@ -264,5 +264,6 @@ message MQTTConnectAuthItem {
 }
 
 message MQTTConnectAuthResponse {
-    repeated MQTTConnectAuthItem result = 1;
+    string auth_type = 1;
+    repeated MQTTConnectAuthItem result = 2;
 }
